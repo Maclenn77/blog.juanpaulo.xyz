@@ -62,31 +62,102 @@ jobs:
           SENDGRID_LIST_ID: ${{ secrets.SENDGRID_LIST_ID }}
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           SENDER_NAME: ${{ secrets.SENDER_NAME }}
+          POST_TITLE: ${{ steps.post_info.outputs.title }}
+          POST_DESCRIPTION: ${{ steps.post_info.outputs.description }}
+          POST_URL: ${{ steps.post_info.outputs.url }}
         run: |
-          curl --request POST \
-            --url https://api.sendgrid.com/v3/marketing/singlesends \
-            --header "Authorization: Bearer $SENDGRID_API_KEY" \
-            --header 'Content-Type: application/json' \
-            --data '{
-              "name": "New Blog Post: ${{ steps.post_info.outputs.title }}",
+          python3 << 'PYTHON_SCRIPT'
+          import os
+          import json
+          import urllib.request
+          import sys
+          
+          # Get environment variables
+          api_key = os.environ['SENDGRID_API_KEY']
+          list_id = os.environ['SENDGRID_LIST_ID']
+          sender_email = os.environ['SENDER_EMAIL']
+          sender_name = os.environ['SENDER_NAME']
+          title = os.environ['POST_TITLE']
+          description = os.environ['POST_DESCRIPTION']
+          url = os.environ['POST_URL']
+          
+          # Build email content
+          html_content = f"""
+          <html>
+          <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h1 style="color: #333;">{title}</h1>
+            <p style="color: #666; line-height: 1.6;">{description}</p>
+            <p style="margin-top: 30px;">
+              <a href="{url}" style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">Read the full post</a>
+            </p>
+          </body>
+          </html>
+          """
+          
+          plain_content = f"New post: {title}\n\n{description}\n\nRead more: {url}"
+          
+          # Create payload
+          payload = {
+              "name": f"New Blog Post: {title}",
               "send_to": {
-                "list_ids": ["'"$SENDGRID_LIST_ID"'"]
+                  "list_ids": [list_id]
               },
               "email_config": {
-                "subject": "New Post: ${{ steps.post_info.outputs.title }}",
-                "html_content": "<html><body><h1>${{ steps.post_info.outputs.title }}</h1><p>${{ steps.post_info.outputs.description }}</p><p><a href=\"${{ steps.post_info.outputs.url }}\">Read the full post</a></p></body></html>",
-                "plain_content": "New post: ${{ steps.post_info.outputs.title }}\n\n${{ steps.post_info.outputs.description }}\n\nRead more: ${{ steps.post_info.outputs.url }}",
-                "sender_id": null,
-                "custom_unsubscribe_url": "",
-                "suppression_group_id": null,
-                "from": {
-                  "email": "'"$SENDER_EMAIL"'",
-                  "name": "'"$SENDER_NAME"'"
-                },
-                "reply_to": {
-                  "email": "'"$SENDER_EMAIL"'",
-                  "name": "'"$SENDER_NAME"'"
-                }
+                  "subject": f"New Post: {title}",
+                  "html_content": html_content,
+                  "plain_content": plain_content,
+                  "from": {
+                      "email": sender_email,
+                      "name": sender_name
+                  },
+                  "reply_to": {
+                      "email": sender_email,
+                      "name": sender_name
+                  }
               },
               "send_at": "now"
-            }'
+          }
+          
+          # Send request
+          url = "https://api.sendgrid.com/v3/marketing/singlesends"
+          headers = {
+              "Authorization": f"Bearer {api_key}",
+              "Content-Type": "application/json"
+          }
+          
+          req = urllib.request.Request(
+              url,
+              data=json.dumps(payload).encode('utf-8'),
+              headers=headers,
+              method='POST'
+          )
+          
+          try:
+              # Create the campaign
+              with urllib.request.urlopen(req) as response:
+                  result = json.loads(response.read().decode('utf-8'))
+                  campaign_id = result.get('id')
+                  print(f"✓ Email campaign created successfully!")
+                  print(f"Campaign ID: {campaign_id}")
+              
+              # Schedule the campaign to send immediately
+              schedule_url = f"https://api.sendgrid.com/v3/marketing/singlesends/{campaign_id}/schedule"
+              schedule_payload = {
+                  "send_at": "now"
+              }
+              
+              schedule_req = urllib.request.Request(
+                  schedule_url,
+                  data=json.dumps(schedule_payload).encode('utf-8'),
+                  headers=headers,
+                  method='PUT'
+              )
+              
+              with urllib.request.urlopen(schedule_req) as schedule_response:
+                  print(f"✓ Campaign scheduled to send immediately!")
+                  
+          except urllib.error.HTTPError as e:
+              error_body = e.read().decode('utf-8')
+              print(f"✗ Error: {e.code} - {error_body}", file=sys.stderr)
+              sys.exit(1)
+          PYTHON_SCRIPT
