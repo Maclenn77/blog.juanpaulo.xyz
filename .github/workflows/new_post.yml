@@ -34,7 +34,7 @@ jobs:
           
           # Extract filename to build URL
           FILENAME=$(basename "$LATEST_POST")
-          POST_SLUG=$(echo "$FILENAME" | sed 's/^[0-9]*-[0-9]*-[0-9]*-//;s/\.(md|markdown)$//')
+          POST_SLUG=$(echo "$FILENAME" | sed 's/^[0-9]*-[0-9]*-[0-9]*-//;s/\.\(md\|markdown\)$//')
           POST_YEAR=$(echo "$FILENAME" | cut -d'-' -f1)
           POST_MONTH=$(echo "$FILENAME" | cut -d'-' -f2)
           POST_DAY=$(echo "$FILENAME" | cut -d'-' -f3)
@@ -127,14 +127,14 @@ jobs:
           html_content = f"""<html>
           <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
             <h1 style="color: #333;">{title}</h1>
-            <p style="color: #666; line-height: 1.6;">{description if description else 'Check out my latest blog post!'}</p>
+            <p style="color: #666; line-height: 1.6;">{description if description else 'Acabo de publicar algo nuevo :)'}</p>
             <p style="margin-top: 30px;">
               <a href="{post_url}" style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">Read the full post</a>
             </p>
           </body>
           </html>"""
           
-          plain_content = f"New post: {title}\n\n{description if description else 'Check out my latest blog post!'}\n\nRead more: {post_url}"
+          plain_content = f"Nuevo contenido: {title}\n\n{description if description else 'Revisa mi última publicación'}\n\nMás aquí: {post_url}"
           
           personalizations = [{"to": [{"email": email}]} for email in subscribers]
           
@@ -144,7 +144,7 @@ jobs:
                   "email": sender_email,
                   "name": sender_name
               },
-              "subject": f"New Post: {title}",
+              "subject": f"Nueva publicación: {title}",
               "content": [
                   {
                       "type": "text/plain",

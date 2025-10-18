@@ -1,9 +1,8 @@
 ---
 layout: post
 title: New test post
-date: 2025-10-18 17:19 -0600
+date: 2025-10-18 17:24 -0600
+description: Una nueva publicación
 ---
 
-## Nuevo post de prueba
-
-Veamos cómo nos va
+## Nueva publicación
