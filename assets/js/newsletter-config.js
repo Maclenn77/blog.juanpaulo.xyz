@@ -19,7 +19,7 @@
     } else {
         // Production - use AWS API Gateway
         // TODO: Replace with your actual API Gateway URL after deployment
-        window.NEWSLETTER_API_URL = 'https://YOUR_API_ID.execute-api.us-east-1.amazonaws.com/subscribe';
+        window.NEWSLETTER_API_URL = 'https://vq6wu7f2q2.execute-api.mx-central-1.amazonaws.com/Prod/';
         console.log('Newsletter: Using production API');
     }
 })();
