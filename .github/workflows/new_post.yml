@@ -1,0 +1,92 @@
+name: Notify Subscribers of New Post
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '_posts/**'
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Get new post details
+        id: post_info
+        run: |
+          # Get the latest post file
+          LATEST_POST=$(ls -t _posts/*.md _posts/*.markdown 2>/dev/null | head -1)
+          
+          if [ -z "$LATEST_POST" ]; then
+            echo "No posts found"
+            exit 0
+          fi
+          
+          # Extract front matter
+          POST_TITLE=$(grep -m 1 "^title:" "$LATEST_POST" | sed 's/title: *//;s/"//g;s/^\[//;s/\]$//')
+          POST_DATE=$(grep -m 1 "^date:" "$LATEST_POST" | sed 's/date: *//')
+          POST_DESCRIPTION=$(grep -m 1 "^description:" "$LATEST_POST" | sed 's/description: *//;s/"//g')
+          
+          # Extract filename to build URL
+          FILENAME=$(basename "$LATEST_POST")
+          POST_SLUG=$(echo "$FILENAME" | sed 's/^[0-9]*-[0-9]*-[0-9]*-//;s/\.(md|markdown)$//')
+          POST_YEAR=$(echo "$FILENAME" | cut -d'-' -f1)
+          POST_MONTH=$(echo "$FILENAME" | cut -d'-' -f2)
+          POST_DAY=$(echo "$FILENAME" | cut -d'-' -f3)
+          
+          # Build post URL (adjust domain as needed)
+          POST_URL="https://blog.juanpaulo.xyz/$POST_YEAR/$POST_MONTH/$POST_DAY/$POST_SLUG.html"
+          
+          # Output for next steps
+          echo "title=$POST_TITLE" >> $GITHUB_OUTPUT
+          echo "date=$POST_DATE" >> $GITHUB_OUTPUT
+          echo "description=$POST_DESCRIPTION" >> $GITHUB_OUTPUT
+          echo "url=$POST_URL" >> $GITHUB_OUTPUT
+          echo "filename=$FILENAME" >> $GITHUB_OUTPUT
+
+      - name: Check if this is a new post
+        id: check_new
+        run: |
+          # Check if the post file was added in this commit
+          git diff --name-status HEAD^ HEAD | grep "^A.*_posts/" && echo "is_new=true" >> $GITHUB_OUTPUT || echo "is_new=false" >> $GITHUB_OUTPUT
+
+      - name: Send email via SendGrid
+        if: steps.check_new.outputs.is_new == 'true'
+        env:
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          SENDGRID_LIST_ID: ${{ secrets.SENDGRID_LIST_ID }}
+          SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
+          SENDER_NAME: ${{ secrets.SENDER_NAME }}
+        run: |
+          curl --request POST \
+            --url https://api.sendgrid.com/v3/marketing/singlesends \
+            --header "Authorization: Bearer $SENDGRID_API_KEY" \
+            --header 'Content-Type: application/json' \
+            --data '{
+              "name": "New Blog Post: ${{ steps.post_info.outputs.title }}",
+              "send_to": {
+                "list_ids": ["'"$SENDGRID_LIST_ID"'"]
+              },
+              "email_config": {
+                "subject": "New Post: ${{ steps.post_info.outputs.title }}",
+                "html_content": "<html><body><h1>${{ steps.post_info.outputs.title }}</h1><p>${{ steps.post_info.outputs.description }}</p><p><a href=\"${{ steps.post_info.outputs.url }}\">Read the full post</a></p></body></html>",
+                "plain_content": "New post: ${{ steps.post_info.outputs.title }}\n\n${{ steps.post_info.outputs.description }}\n\nRead more: ${{ steps.post_info.outputs.url }}",
+                "sender_id": null,
+                "custom_unsubscribe_url": "",
+                "suppression_group_id": null,
+                "from": {
+                  "email": "'"$SENDER_EMAIL"'",
+                  "name": "'"$SENDER_NAME"'"
+                },
+                "reply_to": {
+                  "email": "'"$SENDER_EMAIL"'",
+                  "name": "'"$SENDER_NAME"'"
+                }
+              },
+              "send_at": "now"
+            }'
