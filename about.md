@@ -1,18 +1,20 @@
 ---
 layout: page
-title: About
+title: Sobre este sitio
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Este sitio usa el tema base dede Jekyll. Puedes encontrar más información sobre cómo personalizar tu tema de Jekyll, así como la documentación básica de uso de Jekyll en [jekyllrb.com](https://jekyllrb.com/)
 
-You can find the source code for Minima at GitHub:
+Encuentra el código fuende de Minima en GitHub:
 [jekyll][jekyll-organization] /
 [minima](https://github.com/jekyll/minima)
 
-You can find the source code for Jekyll at GitHub:
+También puedes encontrar el código fuente de Jekyll en GitHub:
 [jekyll][jekyll-organization] /
 [jekyll](https://github.com/jekyll/jekyll)
 
+Y mi propia implementación para este blog:
+[blog.juanpaulo.xyz](https://github.com/maclenn77/blog.juanpaulo.xyz)
 
-[jekyll-organization]: https://github.com/jekyll
+© [J. P. Pérez Tejada](https://juanpaulo.xyz), 2025
