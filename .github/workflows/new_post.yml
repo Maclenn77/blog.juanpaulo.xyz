@@ -162,7 +162,14 @@ jobs:
                       "type": "text/html",
                       "value": html_content
                   }
-              ]
+              ],
+              "mail_settings": {
+                  "footer": {
+                      "enable": True,
+                      "text": "Si ya no quieres recibir estos correos <%asm_group_unsubscribe_raw_url%>",
+                      "html": "<p style='text-align: center; color: #999; font-size: 11px; margin-top: 20px;'><a href='<%asm_group_unsubscribe_raw_url%>' style='color: #007bff;'>darte de baja</a></p>"
+                  }
+              }
           }
           
           url = "https://api.sendgrid.com/v3/mail/send"
