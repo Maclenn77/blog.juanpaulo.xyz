@@ -54,6 +54,7 @@ jobs:
                     if git diff --name-status HEAD^ HEAD | grep -q "^A.*_posts/"; then
                     echo "is_new=true" >> $GITHUB_OUTPUT
                     echo "New post detected (file was added)"
+                    fi
 
       - name: Get subscriber list from SendGrid
         if: steps.check_new.outputs.is_new == 'true'
