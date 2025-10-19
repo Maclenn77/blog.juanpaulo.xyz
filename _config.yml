@@ -14,13 +14,14 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: Blog
+author: Juan Paulo
 description: >- # this means to ignore newlines until "baseurl:"
-    Este es el blog de Juan Paulo, un lingüista e ingeniero de 
-    datos que está cursando una maestría en inteligencia artificial 
-    aplicada. Aquí encontrarás artículos sobre lingüística, 
-    ingeniería de datos y las últimas tendencias en inteligencia artificial.
+    Soy Juan Paulo y este es mi blog. Actualmente estudio la maestría
+    en Inteligencia Artificial Aplicada en el ITESM y trabajo como ingeniero
+    de datos en Apex Systems. Estudié Lingüística en la ENAH y Sociología en
+    la UNAM. Me gusta programar, leer, escribir y aprender cosas nuevas.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://juanpaulo.xyz" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: maclenn77
 threads_username: maclenn77
 mastodon:

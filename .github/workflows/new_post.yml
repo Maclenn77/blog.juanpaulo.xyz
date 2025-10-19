@@ -107,6 +107,7 @@ jobs:
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           SENDER_NAME: ${{ secrets.SENDER_NAME }}
+          SENDGRID_UNSUBSCRIBE_GROUP_ID: ${{ secrets.SENDGRID_UNSUBSCRIBE_GROUP_ID }}
           POST_TITLE: ${{ steps.post_info.outputs.title }}
           POST_DESCRIPTION: ${{ steps.post_info.outputs.description }}
           POST_URL: ${{ steps.post_info.outputs.url }}
@@ -119,6 +120,7 @@ jobs:
           api_key = os.environ['SENDGRID_API_KEY']
           sender_email = os.environ['SENDER_EMAIL']
           sender_name = os.environ.get('SENDER_NAME', 'Blog Notification')
+          unsubscribe_group_id = os.environ.get('SENDGRID_UNSUBSCRIBE_GROUP_ID')
           title = os.environ.get('POST_TITLE', 'New Blog Post')
           description = os.environ.get('POST_DESCRIPTION', '')
           post_url = os.environ['POST_URL']
@@ -132,6 +134,9 @@ jobs:
             <p style="color: #666; line-height: 1.6;">{description if description else 'Acabo de publicar algo nuevo :)'}</p>
             <p style="margin-top: 30px;">
               <a href="{post_url}" style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">¡Léeme aquí!</a>
+            </p>
+            <p style="color: #999; font-size: 12px; text-align: center;">
+              Si no deseas recibir más notificaciones, puedes <a href="<%asm_group_unsubscribe_raw_url%>">darte de baja aquí</a>.
             </p>
           </body>
           </html>"""
