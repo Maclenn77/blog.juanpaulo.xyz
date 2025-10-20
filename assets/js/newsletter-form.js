@@ -30,11 +30,13 @@
         e.preventDefault();
         
         const form = e.target;
+        const nameInput = document.getElementById('name');
         const emailInput = document.getElementById('email');
         const messageDiv = document.getElementById('form-message');
         const button = form.querySelector('button[type="submit"]');
         
         const email = emailInput.value.trim();
+        const first_name = nameInput ? nameInput.value.trim() : '';
         
         // Reset message
         clearMessage(messageDiv);
@@ -74,7 +76,7 @@
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ email: email })
+            body: JSON.stringify({ email: email, first_name: first_name })
         });
     }
 

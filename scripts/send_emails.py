@@ -53,11 +53,11 @@ def send_mail_with_template(contacts, template_data) -> bool:
             "to": [
                 {
                     "email": contact.get('email'),
-                    "name": contact.get('first_name', '')
+                    "name": contact.get('first_name',)
                 }
             ],
             "dynamic_template_data": {
-                "recipient_name": contact.get('first_name')
+                "recipient_name": contact.get('first_name', 'persona')
             } | template_data
         }
         personalizations.append(personalization)

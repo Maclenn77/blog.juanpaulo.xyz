@@ -6,4 +6,7 @@ layout: home
 ---
 
 
-Hola
+## Bienvenid@ 👋
+
+Mi nombre es Juan Paulo y este es mi blog. Explora alguna de mis publicaciones más recientes aquí.
+---
