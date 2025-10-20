@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+from datetime import datetime
 
 # Load environment variables
 
@@ -22,7 +23,7 @@ country = os.environ.get('POST_COUNTRY', 'México')
 # Functions
 
 # Date formatting function
-def format_template_date(fecha_str):
+def format_template_date(date_str):
     """
     Formatea fecha para el template de SendGrid
     """
@@ -32,18 +33,9 @@ def format_template_date(fecha_str):
         9: 'septiembre', 10: 'octubre', 11: 'noviembre', 12: 'diciembre'
     }
     
-    if '-' in fecha_str:
-        partes = fecha_str.split('-')
-        if len(partes[0]) == 4:
-            year = partes[0]
-            month = partes[1]
-            day = partes[2]
-        else:
-            day = partes[0]
-            month = partes[1]
-            year = partes[2]
+    date = datetime.strptime(date_str, "%Y-%m-%d %H:%M %z")
     
-    return f"{int(day)} de {MONTHS[int(month)]} de {year}"
+    return f"{int(date.day)} de {MONTHS[int(date.month)]} de {date.year}"
 
 # send email function
 def send_mail_with_template(contacts, template_data) -> bool:
