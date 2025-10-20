@@ -118,7 +118,7 @@ print("html_content debug", html_content)
 template_data = {
         "subject": title,
         "content": html_content,
-        "description": description,
+        "description": description[0] + description[1:],
         "title": title,
         "city": city,
         "country": country,
