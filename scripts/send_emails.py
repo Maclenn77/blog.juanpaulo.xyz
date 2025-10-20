@@ -69,6 +69,7 @@ def send_mail_with_template(contacts, template_data) -> bool:
             "name": sender_name
         },
         "template_id": template_id,
+        "subject": title,
         "personalizations": personalizations,
         "asm": {
                 "group_id": int(unsubscribe_group_id),
