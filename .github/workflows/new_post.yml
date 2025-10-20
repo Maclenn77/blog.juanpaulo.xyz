@@ -82,4 +82,4 @@ jobs:
           POST_URL: ${{ steps.post_info.outputs.url }}
           POST_CITY: ${{ steps.post_info.outputs.city }}
           POST_DATE: ${{ steps.post_info.outputs.date }}
-        run: python3 send_emails.py
+        run: python3 scripts/send_emails.py
