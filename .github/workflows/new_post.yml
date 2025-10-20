@@ -76,6 +76,7 @@ jobs:
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           SENDER_EMAIL: ${{ secrets.SENDER_EMAIL }}
           SENDER_NAME: ${{ secrets.SENDER_NAME }}
+          SENDGRID_TEMPLATE_ID: ${{ secrets.SENDGRID_TEMPLATE_ID }}
           SENDGRID_UNSUBSCRIBE_GROUP_ID: ${{ secrets.SENDGRID_UNSUBSCRIBE_GROUP_ID }}
           POST_TITLE: ${{ steps.post_info.outputs.title }}
           POST_DESCRIPTION: ${{ steps.post_info.outputs.description }}
