@@ -14,7 +14,7 @@ unsubscribe_group_id = os.environ.get('SENDGRID_UNSUBSCRIBE_GROUP_ID')
 
 # P
 title = os.environ.get('POST_TITLE', 'New Blog Post')
-description = os.environ.get('POST_DESCRIPTION', '')
+description = os.environ.get('POST_DESCRIPTION', 'algo nuevo en el blog.')
 post_url = os.environ['POST_URL']
 post_date = os.environ.get('POST_DATE', '')
 city = os.environ.get('POST_CITY', '')
@@ -113,9 +113,10 @@ headers = {
 
 # Prepare template data
 print("Preparing template data...")
-print("html_content debbug", html_content)
+print("html_content debug", html_content)
 
 template_data = {
+        "subject": title,
         "content": html_content,
         "description": description,
         "title": title,

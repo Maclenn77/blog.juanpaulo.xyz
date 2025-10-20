@@ -1,8 +1,8 @@
 ---
 layout: post
-title: A brand-new test post 3
-date: 2025-10-20 15:32 -0600
-city: CDMX
+title: A brand-new test post 6
+date: 2025-10-20 16:08 -0600
+city: Ciudad de México
 description: una prueba
 ---
 
