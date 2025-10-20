@@ -115,7 +115,6 @@ headers = {
 }
 
 # Prepare template data
-
 template_data = {
         "content": html_content,
         "description": description,
@@ -135,4 +134,3 @@ if not result:
 else:
     print("✓ Email sending completed successfully.")
     exit(0)
-

@@ -31,6 +31,8 @@ jobs:
           POST_TITLE=$(grep -m 1 "^title:" "$LATEST_POST" | sed 's/title: *//;s/"//g;s/^\[//;s/\]$//')
           POST_DATE=$(grep -m 1 "^date:" "$LATEST_POST" | sed 's/date: *//')
           POST_DESCRIPTION=$(grep -m 1 "^description:" "$LATEST_POST" | sed 's/description: *//;s/"//g')
+          POST_CITY=$(grep -m 1 "^city:" "$LATEST_POST" | sed 's/city: *//;s/"//g')
+          POST_COUNTRY=$(grep -m 1 "^country:" "$LATEST_POST" | sed 's/country: *//;s/"//g')
           
           # Extract filename to build URL
           FILENAME=$(basename "$LATEST_POST")
@@ -47,6 +49,8 @@ jobs:
           echo "date=$POST_DATE" >> $GITHUB_OUTPUT
           echo "description=$POST_DESCRIPTION" >> $GITHUB_OUTPUT
           echo "url=$POST_URL" >> $GITHUB_OUTPUT
+          echo "city=$POST_CITY" >> $GITHUB_OUTPUT
+          echo "country=$POST_COUNTRY" >> $GITHUB_OUTPUT
 
       - name: Check if this is a new post
         id: check_new
@@ -54,6 +58,8 @@ jobs:
                     if git diff --name-status HEAD^ HEAD | grep -q "^A.*_posts/"; then
                     echo "is_new=true" >> $GITHUB_OUTPUT
                     echo "New post detected (file was added)"
+                    sudo apt-get install -y pandoc
+                    pandoc LATEST_POST -o output.html
                     fi
 
       - name: Get subscriber list from SendGrid
@@ -62,45 +68,7 @@ jobs:
         env:
           SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
           SENDGRID_LIST_ID: ${{ secrets.SENDGRID_LIST_ID }}
-        run: |
-          cat > get_contacts.py << 'EOF'
-          import os
-          import json
-          import urllib.request
-          
-          api_key = os.environ['SENDGRID_API_KEY']
-          list_id = os.environ['SENDGRID_LIST_ID']
-          
-          url = "https://api.sendgrid.com/v3/marketing/contacts/search"
-          headers = {
-              "Authorization": f"Bearer {api_key}",
-              "Content-Type": "application/json"
-          }
-          
-          payload = {
-              "query": f"CONTAINS(list_ids, '{list_id}')"
-          }
-          
-          req = urllib.request.Request(
-              url,
-              data=json.dumps(payload).encode('utf-8'),
-              headers=headers,
-              method='POST'
-          )
-          
-          try:
-              with urllib.request.urlopen(req) as response:
-                  result = json.loads(response.read().decode('utf-8'))
-                  contacts = result.get('result', [])
-                  emails = [contact['email'] for contact in contacts]
-                  print(f"Found {len(emails)} subscribers")
-                  with open('subscribers.json', 'w') as f:
-                      json.dump(emails, f)
-          except Exception as e:
-              print(f"Error: {e}")
-              exit(1)
-          EOF
-          python3 get_contacts.py
+        run: python3 scripts/get_contacts.py
 
       - name: Send emails via SendGrid
         if: steps.check_new.outputs.is_new == 'true'
@@ -112,85 +80,6 @@ jobs:
           POST_TITLE: ${{ steps.post_info.outputs.title }}
           POST_DESCRIPTION: ${{ steps.post_info.outputs.description }}
           POST_URL: ${{ steps.post_info.outputs.url }}
-        run: |
-          cat > send_emails.py << 'EOF'
-          import os
-          import json
-          import urllib.request
-          
-          api_key = os.environ['SENDGRID_API_KEY']
-          sender_email = os.environ['SENDER_EMAIL']
-          sender_name = os.environ.get('SENDER_NAME', 'Blog Notification')
-          unsubscribe_group_id = os.environ.get('SENDGRID_UNSUBSCRIBE_GROUP_ID')
-          title = os.environ.get('POST_TITLE', 'New Blog Post')
-          description = os.environ.get('POST_DESCRIPTION', '')
-          post_url = os.environ['POST_URL']
-          
-          with open('subscribers.json', 'r') as f:
-              subscribers = json.load(f)
-          
-          html_content = f"""<html>
-          <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #333;">{title}</h1>
-            <p style="color: #666; line-height: 1.6;">{description if description else 'Acabo de publicar algo nuevo :)'}</p>
-            <p style="margin-top: 30px;">
-              <a href="{post_url}" style="background-color: #007bff; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; display: inline-block;">¡Léeme aquí!</a>
-            </p>
-            <p style="color: #999; font-size: 12px; text-align: center;">
-            Si no deseas recibir más notificaciones, puedes <a href="[unsubscribe]" style="color: #007bff;">darte de baja aquí</a>.
-            </p>
-          </body>
-          </html>"""
-          
-          plain_content = f"Nuevo contenido: {title}\n\n{description if description else 'Revisa mi última publicación'}\n\nMás aquí: {post_url}"
-          
-          personalizations = [{"to": [{"email": email}]} for email in subscribers]
-          
-          payload = {
-              "personalizations": personalizations,
-              "from": {
-                  "email": sender_email,
-                  "name": sender_name
-              },
-              "subject": f"Nueva publicación: {title}",
-              "content": [
-                  {
-                      "type": "text/plain",
-                      "value": plain_content
-                  },
-                  {
-                      "type": "text/html",
-                      "value": html_content
-                  }
-              ],
-              "mail_settings": {
-                  "footer": {
-                      "enable": True,
-                      "text": "Si ya no quieres recibir estos correos <%asm_group_unsubscribe_raw_url%>",
-                      "html": "<p style='text-align: center; color: #999; font-size: 11px; margin-top: 20px;'><a href='<%asm_group_unsubscribe_raw_url%>' style='color: #007bff;'>darte de baja</a></p>"
-                  }
-              }
-          }
-          
-          url = "https://api.sendgrid.com/v3/mail/send"
-          headers = {
-              "Authorization": f"Bearer {api_key}",
-              "Content-Type": "application/json"
-          }
-          
-          req = urllib.request.Request(
-              url,
-              data=json.dumps(payload).encode('utf-8'),
-              headers=headers,
-              method='POST'
-          )
-          
-          try:
-              with urllib.request.urlopen(req) as response:
-                  print(f"✓ Emails sent successfully to {len(subscribers)} subscribers!")
-          except urllib.error.HTTPError as e:
-              error_body = e.read().decode('utf-8')
-              print(f"✗ Error: {e.code} - {error_body}")
-              exit(1)
-          EOF
-          python3 send_emails.py
+          POST_CITY: ${{ steps.post_info.outputs.city }}
+          POST_DATE: ${{ steps.post_info.outputs.date }}
+        run: python3 send_emails.py
