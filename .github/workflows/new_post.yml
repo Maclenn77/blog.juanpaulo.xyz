@@ -51,6 +51,7 @@ jobs:
           echo "url=$POST_URL" >> $GITHUB_OUTPUT
           echo "city=$POST_CITY" >> $GITHUB_OUTPUT
           echo "country=$POST_COUNTRY" >> $GITHUB_OUTPUT
+          echo "latest_post=$LATEST_POST" >> $GITHUB_OUTPUT
 
       - name: Check if this is a new post
         id: check_new
