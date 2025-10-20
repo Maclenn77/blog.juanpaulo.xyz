@@ -59,7 +59,7 @@ jobs:
                     echo "is_new=true" >> $GITHUB_OUTPUT
                     echo "New post detected (file was added)"
                     sudo apt-get install -y pandoc
-                    pandoc LATEST_POST -o output.html
+                    pandoc $LATEST_POST -o output.html
                     fi
 
       - name: Get subscriber list from SendGrid
