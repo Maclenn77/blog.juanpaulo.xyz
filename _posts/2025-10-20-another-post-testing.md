@@ -1,7 +1,7 @@
 ---
 layout: post
-title: A post testing
-date: 2025-10-20 14:31 -0600
+title: Another post testing
+date: 2025-10-20 14:36 -0600
 city: CDMX
 description: un post de prueba
 ---
