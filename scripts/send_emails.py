@@ -35,11 +35,15 @@ def format_template_date(fecha_str):
     if '-' in fecha_str:
         partes = fecha_str.split('-')
         if len(partes[0]) == 4:
-            año, mes, dia = partes
+            year = partes[0]
+            month = partes[1]
+            day = partes[2]
         else:
-            dia, mes, año = partes
+            day = partes[0]
+            month = partes[1]
+            year = partes[2]
     
-    return f"{int(dia)} de {MONTHS[int(mes)]} de {año}"
+    return f"{int(day)} de {MONTHS[int(month)]} de {year}"
 
 # send email function
 def send_mail_with_template(contacts, template_data) -> bool:
