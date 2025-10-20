@@ -51,7 +51,7 @@
         setFormLoading(button, emailInput, true);
         
         try {
-            const response = await submitEmail(email);
+            const response = await submitEmail(first_name, email);
             
             if (response.ok) {
                 const data = await response.json();
@@ -70,7 +70,7 @@
     }
 
     // Submit email to API
-    async function submitEmail(email) {
+    async function submitEmail(first_name, email) {
         return fetch(CONFIG.apiUrl, {
             method: 'POST',
             headers: {
