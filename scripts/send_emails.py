@@ -112,6 +112,9 @@ headers = {
 }
 
 # Prepare template data
+print("Preparing template data...")
+print("html_content debbug", html_content)
+
 template_data = {
         "content": html_content,
         "description": description,
