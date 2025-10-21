@@ -113,7 +113,6 @@ headers = {
 
 # Prepare template data
 print("Preparing template data...")
-print("html_content debug", html_content)
 
 template_data = {
         "subject": title,
