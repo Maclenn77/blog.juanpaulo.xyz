@@ -56,7 +56,7 @@ jobs:
       - name: Check if this is a new post
         id: check_new
         run: |
-                    if git diff --name-status HEAD^ HEAD | grep -q "^A.*_posts/"; then
+                    if git diff --name-status HEAD^ HEAD | grep -q "^[AR].*_posts/"; then
                     echo "is_new=true" >> $GITHUB_OUTPUT
                     echo "New post detected (file was added)"
                     sudo apt-get install -y pandoc
