@@ -5,7 +5,10 @@ date: 2025-10-21 20:39 -0600
 city: Ciudad de México
 description: cómo, en retrospectiva, me sentí afortunado de que me rechazaran de un empleo.
 ---
-
+```
+ # NOTA: El script parece que volvió a mandar el mensaje del día anterior en lugar del más
+   reciente porque lo edité. Una disculpa por el correo repetido, espero que esta vez se envíe bien.
+```
 En estos días he pensado sobre cómo a veces es mejor no obtener lo que quieres. Yo siento que las renuncias que he tenido que hacer en muchos momentos de mi vida me han llevado a conocer a nuevas personas y obtener mejores trabajos. Aunque estoy cansado de tantos cambios, creo que estoy agradecido con todo lo que me ha pasado en contra de mi voluntad.
 
 A inicios de 2022 no estaba en uno de mis mejores momentos de la vida. La compañía de Xavier, mi principal cliente para trabajos de redacción y traducción, estaba por irse a la quiebra. Me moví a una casa de estudiantes porque mi padre le advirtió a mi hermana que no me hiciera creer que la casa —la que le ayudaba a mi hermana a pagar— era mía. Me sentía muy molesto con mi cuerpo y me encontraba hecho un manojo de ansiedad.
