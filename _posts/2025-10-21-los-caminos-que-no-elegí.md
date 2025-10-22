@@ -6,8 +6,9 @@ city: Ciudad de México
 description: cómo, en retrospectiva, me sentí afortunado de que me rechazaran de un empleo.
 ---
 ```
- # NOTA: El script volvió a mandar el mensaje del día anterior en lugar del más
- #  reciente. Una disculpa por el correo repetido, espero que esta vez se envíe bien.
+ # NOTA: El script volvió a mandar el mensaje del día anterior en lugar 
+ #  del más reciente. Una disculpa por el correo repetido, espero que 
+ # esta vez se envíe bien.
 ```
 En estos días he pensado sobre cómo a veces es mejor no obtener lo que quieres. Yo siento que las renuncias que he tenido que hacer en muchos momentos de mi vida me han llevado a conocer a nuevas personas y obtener mejores trabajos. Aunque estoy cansado de tantos cambios, creo que estoy agradecido con todo lo que me ha pasado en contra de mi voluntad.
 

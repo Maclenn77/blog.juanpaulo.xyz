@@ -20,7 +20,7 @@ jobs:
         id: post_info
         run: |
           # Get the latest post file
-          LATEST_POST=$(ls _posts/*.md _posts/*.markdown 2>/dev/null | sort -r | head -1)
+          LATEST_POST=$(ls -t _posts/*.md _posts/*.markdown 2>/dev/null | head -1)
           
           if [ -z "$LATEST_POST" ]; then
             echo "No posts found"
