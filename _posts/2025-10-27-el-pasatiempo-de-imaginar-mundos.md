@@ -1,0 +1,31 @@
+---
+layout: post
+title: El pasatiempo de imaginar mundos
+date: 2025-10-27 14:16 -0600
+city: Ciudad de México
+description: recomendaciones para promover la creatividad y mi propia experiencia al imaginar historias.
+---
+
+Si te gusta imaginar mundos, pero sientes que has perdido un poco de creatividad, te recomiendo mucho el libro de [Gramática de la fantasía](https://drive.google.com/file/d/0B8qCYBHBt3d3N2Q2dDI2V0lZZlU/view?usp=sharing&resourcekey=0-j32CDIeOjkZJZ93HvoBDFg), de Gianni Rodari.  Si no lo conoces, estoy seguro que te va a gustar. Y si ya lo conoces, deberías de releerlo. Me he puesto yo también a reelerlo y me he dado cuenta de cuánto había olvidado de su propuesta, desde la base del **binomio fantástico**. Rodari escribe el libro como ejercicios para que los niños ejerciten la imaginación, pero yo creo que uno, como adulto, puede también sacarle mucho provecho.
+
+Brian Eno y Peter Schmidt crearon un juego de cartas para promover la creatividad llamado _Estrategias oblicuas_. Hay una [versión en línea](https://obliquestrategies.ca/#) de este conjunto de cartas. La intención es que cuando sientas algún bloqueo, saques una carta que te pone alguna restricción o busca cambiarte la perspectiva. Yo la verdad lo he explorado poco.
+
+ [Alberto Chimal y Raquel Castro](https://albertoyraquel.substack.com/) escriben mucho sobre cómo escribir historias y tienen muchos ejercicios para darle rienda suelta a la imaginación. Yo he tomado talleres de escritura creativa con ellos, me parecen muy buenos como talleristas y los ejercicios que después publican en redes me han servido como punto de partida de historias que me gustaron después. A mí me cae mejor Raquel. Con ella tomé un taller de desarrollo de personajes y otro de literatura infantil.
+
+Probablemente antes se me ocurrían más historias. Juan luego me remarca cuánto tiempo tengo sin escribir algo —Juan, ¿este blog cuenta como algo?— Siento que se ha debido al hastío de la vida laboral. No me han dado muchas ganas de inventar desde que renuncié a la UNAM. No sé si mis trabajos me han quitado algo de creatividad, o más bien la han dirigido a un lugar diferente, lejos de crear historias.  Actualmente tengo muchas historias sin terminar y la gran mayoría de ellas tengo años sin tocarlas. A veces intento retomarlas, pero me cuesta siquiera recordar cuál era mi intención con el texto. Para mí, crear historias era como ponerme a jugar. A veces siento que me peleé con la fantasía.
+ 
+  De lo que he escrito y terminado, la historia de [Javier, el aplanado](https://docs.google.com/document/d/1X1dFlx3apyl3Uk8l9t9o_EEpE6reETElBrA5BIy-C-U/edit?usp=sharing) es de mis favoritas, aunque el final sigue sin convencerme. Me gusta leerla en voz alta. En el ITESO la presenté como trabajo final de un taller de cuentacuentos que tomé. Yearin quería ilustrar esa historia, pero me dijo que quería primero ser mejor dibujante antes de intentarlo.
+
+Algo que me gusta de programar es que también hay espacio para la creatividad, aunque es una creatividad diferente. Quizá entra más como "ingenio". Me gusta ver proyectos en donde desarrollan aplicaciones no tanto para ser funcionales, sino por diversión o por estética. El [portafolio de Eieio](https://eieio.games/) es un buen ejemplo de este tipo de proyectos. Me agrada que mi sobrino haga mucho eso cuando programa. Él es muy creativo, espero que pueda sobrellevar su dispersión para que lo canalice bien.  
+
+Yo le decía a un amigo programador que desarrollar software también es como inventar una historia. Hay mucho _world building_. Al menos así lo siento cuando defino funciones, creo clases y establezco las propiedades los objetos. O cuando intento entender cómo los datos van de un sitio a otro, me los imagino como personajes. Juan dice que una diferencia muy importante entre programar y crear historias es que al programar al menos puedes estar seguro cuando algo funciona. En cambio, al inventar historias nunca estás seguro de ello. Pero también puedes crear más a gusto cuando no te importa si funciona o no, así es más fácil conservar el aspecto lúdico de crear. Quizá ya en la etapa de edición uno debe ser más severo con uno mismo, pero el acto de crear un mundo debe ser un juego.
+
+Por otro lado, hay algunos autores que al leerlos me animan a querer imaginar mundos. No me acuerdo qué escritor decía que esos son los autores que son tan buenos que te hacen creer que escribir es algo fácil. Dudo que sea una propiedad de unos cuantos autores, más bien hay quienes te resuenan más que otros. Para mí, entre esos autores están Borges, Vila-Matas, Cortázar, Tolkien, Úrsula Le Guin, Italo Calvino y Luis Britto García. Probablemente hay más de lo que ahora no me acuerdo, pero al menos sé que ellos hacen que me den ganas imaginar mundos. ¿Tú tienes algún autor o creador así?
+
+De mis amigos, [Alaya](https://alayadawnjohnson.com/) es de las personas más creativas que conozco, lo cuál no es nada raro porque de eso vive. Lo que disfruto mucho de platicar con ella es ese salto de una idea a otra que hace, las especulaciones que se forma y cómo conecta su conocimiento del mundo con escenarios imaginarios. Gracias a ella tuve la oportunidad de cumplir una de mis fantasías desde que leí a Tolkien: crear la gramática de una lengua ficticia, la cuál utilizaron de referencia para [Tremontaine](https://www.amazon.com.mx/Tremontaine-Ellen-Kushner/dp/1481485598). 
+
+Quisiera poder reconectar con esa parte de mí que le gustaba inventarse historias en la cabeza. El trabajo me absorbe demasiado. Curiosamente, aunque empezar la maestría ha hecho que ahonde aún más en temas técnicos, como que mi mismo cerebro me ha exigido como reacción volver a mi lado creativo. Quizá también se debe a todos los cambios que he tenido que hacer recientemente. Debo volver a imaginar quién quiero ser, qué quiero hacer y dónde quiero estar. Debo reimaginar mi mundo.
+
+Cuando habla del *binomio fantástico*, Rodari señala que la imaginación «no es una facultad cualquiera separada de la mente: es la mente misma. [...] Y la mente nace de la lucha, no de la quietud». Y este mes ha estado lleno de batallas en mi interior.
+
+Espero que algo de estas palabras te ayude a buscar maneras de incentivar tu creatividad y retomar el pasatiempo de imaginar mundos.
