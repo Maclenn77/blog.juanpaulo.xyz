@@ -75,7 +75,7 @@ def send_mail_with_template(contacts, template_data) -> bool:
                 "group_id": int(unsubscribe_group_id),
             },
         "tracking_settings": {
-                "click_tracking": {"enable": True},
+                "click_tracking": {"enable": False},
                 "open_tracking": {"enable": True}
             }
     }
